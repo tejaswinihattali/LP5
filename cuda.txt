@@ -1,0 +1,19 @@
+This program demonstrates parallel computing using CUDA, where we compare CPU execution with GPU execution for operations like vector addition and matrix multiplication.
+
+First, we check whether the system has a CUDA-supported GPU and the CUDA compiler installed. This ensures that our program can run on the GPU.
+
+In the vector addition part, we define a CUDA kernel function using the **global** keyword. This means the function runs on the GPU and is executed by multiple threads in parallel. Each thread calculates one element of the result vector by adding corresponding elements from two input arrays.
+
+We compute the thread index using block index, block dimension, and thread index. This ensures that each thread works on a unique data element. We also include a boundary check to avoid accessing invalid memory.
+
+On the CPU side, we perform the same operation sequentially using a loop and measure the execution time using clock functions. This helps us compare performance.
+
+For GPU execution, we allocate memory on the device using cudaMalloc and transfer data from host to device using cudaMemcpy. We then configure the number of threads and blocks, and launch the kernel using the triple angle bracket syntax.
+
+After execution, we synchronize the device and measure GPU execution time using CUDA events. The result is then copied back to the host memory.
+
+Finally, we calculate speedup by comparing CPU time with GPU time, which shows the efficiency of parallel execution.
+
+In matrix multiplication, a similar approach is used, but each thread computes one element of the output matrix using row and column indices.
+
+Overall, this program highlights how GPUs can significantly improve performance by executing many operations in parallel compared to sequential CPU execution.
